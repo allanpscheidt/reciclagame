@@ -77,8 +77,8 @@ function create() {
 
     createBins(this);
 
-    scoreText = this.add.text(550, 16, 'Pontos: 0', { fontSize: '12px', fill: '#000' });
-    instructionText = this.add.text(550, 36, 'Mova com as direcionais.\nPegue o lixo e solte com barra de espaço.', { fontSize: '10px', fill: '#000' });
+    scoreText = this.add.text(650, 16, 'Pontos: 0', { fontSize: '16px', fill: '#000' });
+    instructionText = this.add.text(650, 36, 'Mova com as direcionais.\nPegue o lixo e solte com barra de espaço.', { fontSize: '12px', fill: '#000' });
 
     scoreText.setDepth(1); // Garante que o placar fique acima do fundo
     instructionText.setDepth(1); // Garante que as instruções fiquem acima do fundo
@@ -90,6 +90,28 @@ function create() {
         callback: () => generateTrash(this, 5),
         callbackScope: this,
         loop: true
+    });
+
+    // Adiciona suporte a controles de toque
+    this.input.on('pointerdown', function (pointer) {
+        const touchX = pointer.worldX;
+        const touchY = pointer.worldY;
+        
+        if (touchY > player.y) {
+            player.setVelocityY(160);
+        } else if (touchY < player.y) {
+            player.setVelocityY(-160);
+        }
+
+        if (touchX > player.x) {
+            player.setVelocityX(160);
+        } else if (touchX < player.x) {
+            player.setVelocityX(-160);
+        }
+    });
+
+    this.input.on('pointerup', function (pointer) {
+        player.setVelocity(0);
     });
 }
 
