@@ -4,6 +4,7 @@
 Reciclagame é um jogo educativo onde o jogador deve coletar e classificar diferentes tipos de lixo em lixeiras de reciclagem apropriadas. O objetivo é ensinar sobre a importância da reciclagem de forma divertida e interativa.
 
 ## Como Jogar
+- Abra o jogo em https://allanpscheidt.github.io/reciclagame/ 
 - Use as teclas de seta para mover o jogador.
 - Pressione a barra de espaço para pegar o lixo (quando estiver em cima de um).
 - Leve o lixo até a lixeira correspondente e pressione a barra de espaço novamente para soltá-lo.
