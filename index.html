@@ -40,7 +40,7 @@
     <div id="instructions">
         <h1>Bem-vindo ao Reciclagame!</h1>
         <p>Você é responsável em coletar o lixo e levá-lo para a lixeira correta.</p>
-        <p>Use as teclas de seta para mover o jogador.</p>
+            <p></p>Use as teclas de seta para mover o jogador.</p>
         <p>Pressione a barra de espaço para pegar o lixo (quando estiver em cima de um).</p>
         <p>Leve o lixo até a lixeira correspondente e pressione a barra de espaço novamente para soltá-lo.</p>
         <p>Você ganha pontos ao reciclar corretamente e perde pontos ao reciclar incorretamente.</p>
@@ -70,6 +70,9 @@
             };
 
             const game = new Phaser.Game(config);
+
+            // Capturar eventos de teclado
+            window.focus();
         }
     </script>
     <script src="game.js"></script>
