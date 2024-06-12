@@ -1,28 +1,10 @@
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 }
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
-
-const game = new Phaser.Game(config);
-
 let player;
 let cursors;
 let trashGroup;
 let bins = {};
 let score = 0;
 let scoreText;
+let instructionText;
 let carryingTrash = null;
 
 const trashTypes = [
@@ -77,12 +59,15 @@ function create() {
     createBins(this);
 
     scoreText = this.add.text(650, 16, 'Pontos: 0', { fontSize: '16px', fill: '#000' });
+    instructionText = this.add.text(650, 36, 'Mova com as direcionais.\nPegue o lixo e solte com barra de espaço.', { fontSize: '12px', fill: '#000' });
+
     scoreText.setDepth(1); // Garante que o placar fique acima do fundo
+    instructionText.setDepth(1); // Garante que as instruções fiquem acima do fundo
     player.setDepth(2); // Garante que o jogador fique acima de todos os objetos
 
-    // Gera novos lixos a cada 40 segundos
+    // Gera novos lixos a cada 20 segundos
     this.time.addEvent({
-        delay: 40000,
+        delay: 20000,
         callback: () => generateTrash(this, 5),
         callbackScope: this,
         loop: true
