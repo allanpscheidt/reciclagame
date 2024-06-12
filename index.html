@@ -44,34 +44,33 @@
         <p>Leve o lixo até a lixeira correspondente e pressione a barra de espaço novamente para soltá-lo.</p>
         <p>Você ganha pontos ao reciclar corretamente e perde pontos ao reciclar incorretamente.</p>
         <p>Ganhe o jogo ao alcançar 100 pontos e perca ao alcançar -50 pontos.</p>
-        <button onclick="hideInstructions()">Começar a Jogar</button>
+        <button onclick="startGame()">Começar a Jogar</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
-    <script src="game.js"></script>
     <script>
-        function hideInstructions() {
+        function startGame() {
             document.getElementById('instructions').style.display = 'none';
-        }
-
-        const config = {
-            type: Phaser.AUTO,
-            width: window.innerWidth,
-            height: window.innerHeight,
-            parent: 'gameContainer',
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 0 }
+            const config = {
+                type: Phaser.AUTO,
+                width: window.innerWidth,
+                height: window.innerHeight,
+                parent: 'gameContainer',
+                physics: {
+                    default: 'arcade',
+                    arcade: {
+                        gravity: { y: 0 }
+                    }
+                },
+                scene: {
+                    preload: preload,
+                    create: create,
+                    update: update
                 }
-            },
-            scene: {
-                preload: preload,
-                create: create,
-                update: update
-            }
-        };
+            };
 
-        const game = new Phaser.Game(config);
+            const game = new Phaser.Game(config);
+        }
     </script>
+    <script src="game.js"></script>
 </body>
 </html>
