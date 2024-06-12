@@ -1,19 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jogo de Reciclagem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclagame</title>
     <style>
         body {
             margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
-        canvas {
-            display: block;
+        #gameContainer {
+            width: 100vw;
+            height: 100vh;
+        }
+        #instructions {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 10;
+        }
+        #instructions button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
+    <div id="gameContainer"></div>
+    <div id="instructions">
+        <h1>Bem-vindo ao Reciclagame!</h1>
+        <p>Use as teclas de seta para mover o jogador.</p>
+        <p>Pressione a barra de espaço para pegar o lixo (quando estiver em cima de um).</p>
+        <p>Leve o lixo até a lixeira correspondente e pressione a barra de espaço novamente para soltá-lo.</p>
+        <p>Você ganha pontos ao reciclar corretamente e perde pontos ao reciclar incorretamente.</p>
+        <p>Ganhe o jogo ao alcançar 100 pontos e perca ao alcançar -50 pontos.</p>
+        <button onclick="hideInstructions()">Começar a Jogar</button>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
     <script src="game.js"></script>
+    <script>
+        function hideInstructions() {
+            document.getElementById('instructions').style.display = 'none';
+        }
+
+        const config = {
+            type: Phaser.AUTO,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            parent: 'gameContainer',
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 0 }
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        const game = new Phaser.Game(config);
+    </script>
 </body>
 </html>
