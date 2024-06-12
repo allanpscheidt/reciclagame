@@ -1,3 +1,22 @@
+const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 }
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+const game = new Phaser.Game(config);
+
 let player;
 let cursors;
 let trashGroup;
@@ -61,9 +80,9 @@ function create() {
     scoreText.setDepth(1); // Garante que o placar fique acima do fundo
     player.setDepth(2); // Garante que o jogador fique acima de todos os objetos
 
-    // Gera novos lixos a cada 20 segundos
+    // Gera novos lixos a cada 40 segundos
     this.time.addEvent({
-        delay: 20000,
+        delay: 40000,
         callback: () => generateTrash(this, 5),
         callbackScope: this,
         loop: true
@@ -133,53 +152,53 @@ function createBins(scene) {
         const bin = scene.add.image(binTypes[i].x, binTypes[i].y, binTypes[i].color);
         bin.displayWidth = 43.5; // Largura reduzida pela metade (87 / 2)
         bin.displayHeight = 43.5; // Altura reduzida pela metade (87 / 2)
-        bins [binTypes[i].name] = bin;
-}
+        bins[binTypes[i].name] = bin;
+    }
 }
 
 function handlePickUpOrDrop() {
-if (carryingTrash) {
-// Tentativa de soltar o lixo na lixeira correta
-if (player.x > 50 && player.x < 550 && player.y < 100) {
-for (const [type, bin] of Object.entries(bins)) {
-if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), bin.getBounds())) {
-if (type === carryingTrash.getData(‘type’)) {
-score += carryingTrash.getData(‘points’);
-} else {
-score -= 10;
-}
-carryingTrash.destroy();
-carryingTrash = null;
-player.setTexture(‘player’); // Volta a textura normal
-updateScore();
-checkGameOver();
-return;
-}
-}
-}
-} else {
-// Tentativa de pegar o lixo
-trashGroup.getChildren().forEach(trash => {
-if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), trash.getBounds())) {
-carryingTrash = trash;
-trash.setVisible(false); // O lixo desaparece quando é pego
-trash.body.enable = false; // Desativa a física do lixo
-player.setTexture(‘playerdown’); // Altera a textura para a imagem segurando lixo
-}
-});
-}
+    if (carryingTrash) {
+        // Tentativa de soltar o lixo na lixeira correta
+        if (player.x > 50 && player.x < 550 && player.y < 100) {
+            for (const [type, bin] of Object.entries(bins)) {
+                if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), bin.getBounds())) {
+                    if (type === carryingTrash.getData('type')) {
+                        score += carryingTrash.getData('points');
+                    } else {
+                        score -= 10;
+                    }
+                    carryingTrash.destroy();
+                    carryingTrash = null;
+                    player.setTexture('player'); // Volta a textura normal
+                    updateScore();
+                    checkGameOver();
+                    return;
+                }
+            }
+        }
+    } else {
+        // Tentativa de pegar o lixo
+        trashGroup.getChildren().forEach(trash => {
+            if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), trash.getBounds())) {
+                carryingTrash = trash;
+                trash.setVisible(false); // O lixo desaparece quando é pego
+                trash.body.enable = false; // Desativa a física do lixo
+                player.setTexture('playerdown'); // Altera a textura para a imagem segurando lixo
+            }
+        });
+    }
 }
 
 function updateScore() {
-scoreText.setText(’Pontos: ’ + score);
+    scoreText.setText('Pontos: ' + score);
 }
 
 function checkGameOver() {
-if (score <= -50) {
-alert(‘Você perdeu!’);
-location.reload();
-} else if (score >= 100) {
-alert(‘Você ganhou!’);
-location.reload();
-}
+    if (score <= -50) {
+        alert('Você perdeu!');
+        location.reload();
+    } else if (score >= 100) {
+        alert('Você ganhou!');
+        location.reload();
+    }
 }
