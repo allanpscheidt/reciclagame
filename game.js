@@ -133,12 +133,11 @@ function createBins(scene) {
         const bin = scene.add.image(binTypes[i].x, binTypes[i].y, binTypes[i].color);
         bin.displayWidth = 43.5; // Largura reduzida pela metade (87 / 2)
         bin.displayHeight = 43.5; // Altura reduzida pela metade (87 / 2)
-        bins[binTypes[i].name] = bin;
-    }
+        bins [binTypes[i].name] = bin;
+}
 }
 
-function handlePickUpOrDrop
-() {
+function handlePickUpOrDrop() {
 if (carryingTrash) {
 // Tentativa de soltar o lixo na lixeira correta
 if (player.x > 50 && player.x < 550 && player.y < 100) {
