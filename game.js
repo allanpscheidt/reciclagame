@@ -78,7 +78,7 @@ function create() {
     createBins(this);
 
     scoreText = this.add.text(550, 16, 'Pontos: 0', { fontSize: '14px', fill: '#000' });
-    instructionText = this.add.text(550, 36, 'Mova com as direcionais.\nPegue o lixo e solte com barra de espaço.', { fontSize: '11px', fill: '#000' });
+    instructionText = this.add.text(550, 36, 'Mova com as direcionais.\nPegue e solte com espaço.', { fontSize: '11px', fill: '#000' });
 
     scoreText.setDepth(1); // Garante que o placar fique acima do fundo
     instructionText.setDepth(1); // Garante que as instruções fiquem acima do fundo
